@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+
+	<!--去配置的profile里面找log的路径 -->
+	<springProperty scope="context" name="LOG_BASE_HOME" source="app.log.file.dir"/>
+	<springProperty scope="context" name="MAX_HISTORY_SYS" source="app.log.file.sys.save.history"/>
+	<springProperty scope="context" name="LOG_PATTERN" source="app.log.msg.pattern"/>
+	<springProperty scope="context" name="APPENDER_CONSOLE" source="app.log.appender.console"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}
+				${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} :
+				%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="NOP" class="ch.qos.logback.core.helpers.NOPAppender">
+	</appender>
+
+	<!-- System log appender -->
+	<appender name="file.log.sys" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<file>${LOG_BASE_HOME}/ing/sys.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_BASE_HOME}/sys/%d{yyyyMMdd}.sys.log</fileNamePattern>
+			<MaxHistory>${MAX_HISTORY_SYS}</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="${APPENDER_CONSOLE}"/>
+		<appender-ref ref="file.log.sys"/>
+	</root>
+
+</configuration>
