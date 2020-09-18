@@ -20,10 +20,10 @@ import java.io.IOException;
 public class HttpClientWrapperTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0152ad03-30b2-4544-a7c0-77e3935b4fa6";
-    private String proxy = "http://proxy.bmwbrill.cn:8080";
-    private String user = "vs006316";
-    private String password = "LingYue100";
+    private String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=test";
+    private String proxy = "http://proxy.xxx.cn:8080";
+    private String user = "userxx";
+    private String password = "passxx";
 
     public void testUserPassProxyGet() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
