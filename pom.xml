@@ -17,7 +17,6 @@
 	<properties>
 		<java.version>11</java.version>
 		<powermock.version>2.0.7</powermock.version>
-		<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -88,17 +87,6 @@
 				<configuration>
 					<!-- ZIP for support external classpath, specify in jvm argument -Dloader.path="./ext-cp" -->
 					<layout>ZIP</layout>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven-surefire-plugin.version}</version>
-				<configuration>
-					<argLine>
-						-Dfile.encoding=UTF-8
-					</argLine>
-					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
